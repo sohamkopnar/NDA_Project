@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}NDA Prep{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-body">
+  <div class="app-shell">
+    <main class="main-content">
+      <div class="page-controls">
+        <button class="back-button" type="button" onclick="goBack()" aria-label="Go back">← <span>Back</span></button>
+        <a class="home-shortcut" href="{{ url_for('dashboard') }}">⌂ <span>Home</span></a>
+      </div>
+      {% block content %}{% endblock %}
+    </main>
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">✦</span><span>NDA <b>PREP</b><small>CADET PORTAL</small></span></a>
+      <div class="side-label">MAIN MENU</div>
+      <nav class="side-nav">
+        <a class="{% if request.endpoint=='dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}"><span>⌂</span> Home</a>
+        <a class="{% if request.endpoint=='subjects' %}active{% endif %}" href="{{ url_for('subjects') }}"><span>▤</span> Study</a>
+        <a class="{% if request.endpoint in ['quiz','result'] %}active{% endif %}" href="{{ url_for('quiz') }}"><span>▣</span> Mock Test</a>
+        <a class="{% if request.endpoint=='podcasts' %}active{% endif %}" href="{{ url_for('podcasts') }}"><span>♫</span> Podcasts</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="user-mini"><div class="avatar">{{ session.get('user_name','C')[0]|upper }}</div><div><b>{{ session.get('user_name','Cadet') }}</b><small>Registered cadet</small></div></div>
+        <a class="logout" href="{{ url_for('logout') }}">↪ &nbsp; Sign out</a>
+      </div>
+    </aside>
+  </div>
+  <script>
+    function goBack() {
+      if (window.history.length > 1 && document.referrer && new URL(document.referrer).origin === window.location.origin) {
+        window.history.back();
+      } else {
+        window.location.href = "{{ url_for('dashboard') }}";
+      }
+    }
+  </script>
+</body>
+</html>
