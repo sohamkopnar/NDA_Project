@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from functools import wraps
 from pathlib import Path
 import sqlite3, random, os
@@ -170,6 +170,13 @@ def podcasts():
       {'title':'Stories of courage','desc':'Listen to stories of service, teamwork and resilience.','image':'https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=900&q=80','url':'https://www.youtube.com/results?search_query=Indian+Army+bravery+stories'},
       {'title':'Focus under pressure','desc':'Practical ideas for staying calm during preparation and exams.','image':'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80','url':'https://www.youtube.com/results?search_query=focus+study+motivation'}]
     return render_template('podcasts.html', episodes=episodes)
+
+
+# ----------------- GOOGLE SEARCH CONSOLE VERIFICATION -----------------
+
+@app.route('/google82d783a71581b1df.html')
+def google_verification():
+    return send_from_directory(BASE_DIR, 'google82d783a71581b1df.html')
 
 
 if __name__ == '__main__':
