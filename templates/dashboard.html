@@ -1,1 +1,71 @@
-{% extends 'base.html' %}{% block title %}Overview | NDA Prep{% endblock %}{% block content %}<header class="topbar"><div><div class="crumb">CADET PORTAL / OVERVIEW</div><h1>Good day, {{name.split()[0]}}.</h1><p class="muted">Every focused session brings you closer to your goal.</p></div><div class="date-pill">🇮🇳 &nbsp; NDA PREPARATION</div></header><section class="welcome-banner"><div><span class="eyebrow">YOUR MISSION STARTS TODAY</span><h2>Prepare with discipline.<br>Progress with confidence.</h2><p>Your personal space for learning, practice and reflection.</p><a class="banner-btn" href="{{url_for('subjects')}}">Continue studying <span>→</span></a></div><div class="banner-emblem">✦</div></section><section class="stats-grid"><article class="stat-card"><span class="stat-icon">▣</span><small>Mock tests completed</small><strong>{{stats.tests}}</strong><span class="stat-foot">Your practice history</span></article><article class="stat-card"><span class="stat-icon">◎</span><small>Best score</small><strong>{{stats.best}}<em> / 10</em></strong><span class="stat-foot">Across completed tests</span></article><article class="stat-card"><span class="stat-icon">▤</span><small>Study subjects</small><strong>08</strong><span class="stat-foot">Explore the syllabus</span></article></section><div class="section-heading"><div><h2>Your preparation tools</h2><p class="muted">Choose what you want to work on next.</p></div></div><section class="tool-grid"><a class="tool-card" href="{{url_for('subjects')}}"><span class="tool-symbol green">▤</span><h3>Study subjects</h3><p>Explore subject-wise topics and trusted learning resources.</p><span class="card-link">Browse subjects →</span></a><a class="tool-card" href="{{url_for('quiz')}}"><span class="tool-symbol amber">▣</span><h3>Mock examination</h3><p>Attempt a timed-style practice set and review your score.</p><span class="card-link">Start a mock test →</span></a><a class="tool-card" href="{{url_for('podcasts')}}"><span class="tool-symbol blue">♫</span><h3>Inspiration</h3><p>Explore motivational talks and stories to support your routine.</p><span class="card-link">Explore inspiration →</span></a></section><section class="history"><div class="section-heading"><div><h2>Recent practice</h2><p class="muted">Your five latest mock-test results.</p></div></div>{% if results %}<div class="table-wrap"><table><thead><tr><th>Attempt</th><th>Date</th><th>Score</th><th>Result</th></tr></thead><tbody>{% for r in results %}<tr><td>Mock test #{{loop.index}}</td><td>{{r.date}}</td><td><b>{{r.score}} / {{r.total}}</b></td><td><span class="result-chip">Completed</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><span>▣</span><b>No attempts yet</b><p>Your completed mock tests will appear here.</p><a href="{{url_for('quiz')}}">Take your first test →</a></div>{% endif %}</section>{% endblock %}
+{% extends 'base.html' %}{% block title %}Overview | NDA Prep{% endblock %}{% block content %}<header class="topbar">
+    <div>
+        <div class="crumb">CADET PORTAL / OVERVIEW</div>
+        <h1>Good day, {{name.split()[0]}}.</h1>
+        <p class="muted">Every focused session brings you closer to your goal.</p>
+    </div>
+    <div class="date-pill">🇮🇳 &nbsp; NDA PREPARATION</div>
+</header>
+<section class="welcome-banner">
+    <div><span class="eyebrow">YOUR MISSION STARTS TODAY</span>
+        <h2>Prepare with discipline.<br>Progress with confidence.</h2>
+        <p>Your personal space for learning, practice and reflection.</p><a class="banner-btn"
+            href="{{url_for('subjects')}}">Continue studying <span>→</span></a>
+    </div>
+    <div class="banner-emblem">✦</div>
+</section>
+<section class="stats-grid">
+    <article class="stat-card"><span class="stat-icon">▣</span><small>Mock tests
+            completed</small><strong>{{stats.tests}}</strong><span class="stat-foot">Your practice history</span>
+    </article>
+    <article class="stat-card"><span class="stat-icon">◎</span><small>Best score</small><strong>{{stats.best}}<em> /
+                10</em></strong><span class="stat-foot">Across completed tests</span></article>
+    <article class="stat-card"><span class="stat-icon">▤</span><small>Study subjects</small><strong>08</strong><span
+            class="stat-foot">Explore the syllabus</span></article>
+</section>
+<div class="section-heading">
+    <div>
+        <h2>Your preparation tools</h2>
+        <p class="muted">Choose what you want to work on next.</p>
+    </div>
+</div>
+<section class="tool-grid"><a class="tool-card" href="{{url_for('subjects')}}"><span class="tool-symbol green">▤</span>
+        <h3>Study subjects</h3>
+        <p>Explore subject-wise topics and trusted learning resources.</p><span class="card-link">Browse subjects
+            →</span>
+    </a><a class="tool-card" href="{{url_for('quiz')}}"><span class="tool-symbol amber">▣</span>
+        <h3>Mock examination</h3>
+        <p>Attempt a timed-style practice set and review your score.</p><span class="card-link">Start a mock test
+            →</span>
+    </a><a class="tool-card" href="{{url_for('podcasts')}}"><span class="tool-symbol blue">♫</span>
+        <h3>Inspiration</h3>
+        <p>Explore motivational talks and stories to support your routine.</p><span class="card-link">Explore
+            inspiration →</span>
+    </a></section>
+<section class="history">
+    <div class="section-heading">
+        <div>
+            <h2>Recent practice</h2>
+            <p class="muted">Your five latest mock-test results.</p>
+        </div>
+    </div>{% if results %}<div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Attempt</th>
+                    <th>Date</th>
+                    <th>Score</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>{% for r in results %}<tr>
+                    <td>Mock test #{{loop.index}}</td>
+                    <td>{{r.date}}</td>
+                    <td><b>{{r.score}} / {{r.total}}</b></td>
+                    <td><span class="result-chip">Completed</span></td>
+                </tr>{% endfor %}</tbody>
+        </table>
+    </div>{% else %}<div class="empty-state"><span>▣</span><b>No attempts yet</b>
+        <p>Your completed mock tests will appear here.</p><a href="{{url_for('quiz')}}">Take your first test →</a>
+    </div>{% endif %}
+</section>{% endblock %}

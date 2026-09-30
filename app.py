@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from functools import wraps
 from pathlib import Path
 import sqlite3, random, os
@@ -74,6 +74,12 @@ QUESTION_BANK = [
 ('The Indian Armed Forces are commanded constitutionally by the:', ['Prime Minister','President','Chief Justice','Home Minister'], 'President', 'Defence Awareness'),
 ('The Indian Naval Academy is located at:', ['Khadakwasla','Ezhimala','Dehradun','Dundigal'], 'Ezhimala', 'Defence Awareness'),
 ]
+
+
+@app.route('/google82d783a71581b1df.html')
+def google_site_verification():
+    # Google Search Console HTML-file verification must be served from the site root.
+    return send_from_directory(BASE_DIR, 'google82d783a71581b1df.html', mimetype='text/html')
 
 
 @app.route('/')

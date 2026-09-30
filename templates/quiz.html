@@ -1,1 +1,21 @@
-{% extends 'base.html' %}{% block title %}Mock examination | NDA Prep{% endblock %}{% block content %}<header class="topbar"><div><div class="crumb">CADET PORTAL / PRACTICE</div><h1>Mock examination</h1><p class="muted">10 randomly selected NDA-pattern questions. Choose one answer for each.</p></div><span class="date-pill">PRACTICE MODE</span></header><div class="notice"><b>Before you begin</b><span>This is an original practice set inspired by common NDA topics, not an official UPSC paper. Submit when you have answered the questions.</span></div><form method="POST" class="quiz-form"><div class="quiz-progress"><b>Question set</b><span>10 questions · 1 mark each</span></div>{% for q in questions %}{% set qi = loop.index0 %}<article class="question-card"><div class="question-meta"><span>QUESTION {{'%02d'|format(loop.index)}}</span><span>{{q.topic}}</span></div><h3>{{q.question}}</h3><div class="options">{% for option in q.options %}<label class="option"><input type="radio" name="q{{qi}}" value="{{option}}" required><span class="option-letter">{{'ABCD'[loop.index0]}}</span><span>{{option}}</span></label>{% endfor %}</div></article>{% endfor %}<button class="primary-btn submit-btn" type="submit">Submit answers <span>→</span></button></form>{% endblock %}
+{% extends 'base.html' %}{% block title %}Mock examination | NDA Prep{% endblock %}{% block content %}<header
+    class="topbar">
+    <div>
+        <div class="crumb">CADET PORTAL / PRACTICE</div>
+        <h1>Mock examination</h1>
+        <p class="muted">10 randomly selected NDA-pattern questions. Choose one answer for each.</p>
+    </div><span class="date-pill">PRACTICE MODE</span>
+</header>
+<div class="notice"><b>Before you begin</b><span>This is an original practice set inspired by common NDA topics, not an
+        official UPSC paper. Submit when you have answered the questions.</span></div>
+<form method="POST" class="quiz-form">
+    <div class="quiz-progress"><b>Question set</b><span>10 questions · 1 mark each</span></div>{% for q in questions
+    %}{% set qi = loop.index0 %}<article class="question-card">
+        <div class="question-meta"><span>QUESTION {{'%02d'|format(loop.index)}}</span><span>{{q.topic}}</span></div>
+        <h3>{{q.question}}</h3>
+        <div class="options">{% for option in q.options %}<label class="option"><input type="radio" name="q{{qi}}"
+                    value="{{option}}" required><span
+                    class="option-letter">{{'ABCD'[loop.index0]}}</span><span>{{option}}</span></label>{% endfor %}
+        </div>
+    </article>{% endfor %}<button class="primary-btn submit-btn" type="submit">Submit answers <span>→</span></button>
+</form>{% endblock %}
