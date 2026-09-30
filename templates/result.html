@@ -1,1 +1,3 @@
-{% extends 'base.html' %}{% block title %}Test result | NDA Prep{% endblock %}{% block content %}<div class="result-page"><div class="result-medal">✦</div><div class="crumb">MOCK EXAMINATION / RESULT</div><h1>Practice completed</h1><p class="muted">Review your score, identify topics to revisit and keep going.</p><div class="score-panel"><span>Your score</span><strong>{{score}}<small> / {{total}}</small></strong><div class="score-track"><span style="width:{{(score/total*100) if total else 0}}%"></span></div><b>{{((score/total*100)|round|int) if total else 0}}% accuracy</b></div><div class="result-actions"><a class="primary-btn" href="{{url_for('quiz')}}">Try another mock test →</a><a class="secondary-btn" href="{{url_for('dashboard')}}">Back to overview</a></div></div>{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Test result | NDA Prep{% endblock %}
+{% block content %}
