@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, session
 from functools import wraps
 from pathlib import Path
 import sqlite3, random, os
@@ -47,7 +47,6 @@ SUBJECTS = [
     {'name':'Current Affairs','icon':'📰','desc':'Follow national and international news and defence updates.','url':'https://www.pib.gov.in/','tag':'GAT'}
 ]
 
-# Original NDA-pattern practice questions. Use official UPSC papers for authentic past papers.
 QUESTION_BANK = [
 ('If 2x + 5 = 17, find x.', ['5','6','7','8'], '6', 'Algebra'),
 ('The sum of the first  n natural numbers is:', ['n²','n(n+1)/2','n(n−1)/2','2n'], 'n(n+1)/2', 'Algebra'),
@@ -159,7 +158,7 @@ def quiz():
 @login_required
 def result():
     if 'score' not in session: return redirect(url_for('quiz'))
-    return render_template('result.html', score=session.pop('score'), total=session.pop('total'))
+    return render_template('result.html', score=score_val if (score_val := session.pop('score', None)) else 0, total=session.pop('total', 10))
 
 
 @app.route('/podcasts')
@@ -170,13 +169,6 @@ def podcasts():
       {'title':'Stories of courage','desc':'Listen to stories of service, teamwork and resilience.','image':'https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=900&q=80','url':'https://www.youtube.com/results?search_query=Indian+Army+bravery+stories'},
       {'title':'Focus under pressure','desc':'Practical ideas for staying calm during preparation and exams.','image':'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80','url':'https://www.youtube.com/results?search_query=focus+study+motivation'}]
     return render_template('podcasts.html', episodes=episodes)
-
-
-# ----------------- GOOGLE SEARCH CONSOLE VERIFICATION -----------------
-
-@app.route('/google82d783a71581b1df.html')
-def google_verification():
-    return send_from_directory(BASE_DIR, 'google82d783a71581b1df.html')
 
 
 if __name__ == '__main__':
